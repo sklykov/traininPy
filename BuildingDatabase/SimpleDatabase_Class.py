@@ -25,7 +25,7 @@ class Quad2DImage(Gen2DImage):
 
 
 
-# %% Testing class fetures
+# %% Testing class features
 if __name__ == '__main__':
     img = Gen2DImage(3,2)
     print(img.I)
