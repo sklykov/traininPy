@@ -34,7 +34,23 @@ def encode(message:str,positions:dict,shift:int=1):
         encodedMessage += encoded_letter # both styles for variables naming :)
     return encodedMessage
 
+# %% Decoding messages
+def decode(message:str,positions:dict,shift:int=1)->str:
+    """Decoding messages using inversion of a shift used for encode them """
+    decodedMessage = ""
+    for i in range(len(message)):
+        positionChar = positions[message[i]]
+        if (positionChar - shift) < 0:
+            positionChar = (positions['z'] + positionChar) - shift # for preventing index overflow
+        else:
+            positionChar -= shift
+        decoded_letter = getKey(positions,positionChar) # get a new, encoded letter
+        decodedMessage += decoded_letter # both styles for variables naming :)
+    return decodedMessage
+
 # %% Testing
 inputMessage = "hi my name is caesar"
 encodedMessage1 = encode(inputMessage,positions)
 encodedMessage2 = encode(inputMessage,positions,3)
+decodedMessage1 = decode(encodedMessage1,positions)
+decodedMessage2 = decode(encodedMessage2,positions,3)
