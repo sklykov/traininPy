@@ -1,18 +1,38 @@
 # -*- coding: utf-8 -*-
 """
-Counting unique words in various texts - an exercise from the edX course
+Counting unique words in various texts - an exercise from the edX course.
 @author: ssklykov
 """
-
-# %% Developing of the function
+# %% Developing of the function to count unique words in an input text
 def countWords(text:str)->dict:
+    """Prototype of a function counting number of appeareances of words in a text."""
     word_count = {}
+    text = text.lower() # to prevent counting We and we as different words
+    skips = [".",",",";",":","'"]
+    for character in skips:
+        text = text.replace(character,"")
     for word in text.split(" "):
         if word in word_count.keys(): # the parenthesis are necessary!
             word_count[word] += 1
         else:
             word_count[word] = 1
     return word_count
+
+# %% Open and read text as a single, long string
+def readText(text_file)->str:
+    """Read a text from a file."""
+    text = ""
+    with open(text_file,'r',encoding='utf8') as rtextFile:
+        text = rtextFile.read()
+        text = (text.replace("\n","").replace("\r", ""))
+    return text
+
+# %% Statistics for the accounting of words in a text
+def word_stat(word_counts:dict)->tuple:
+    """Return just numbers of words and their frequencies."""
+    unique_words = len(word_counts)
+    counts = word_counts.values()
+    return (unique_words,counts)
 
 # %% Testing conditions
 input_text = "We choose to go to the moon. We choose to go to the moon in this decade and do the other things,\
