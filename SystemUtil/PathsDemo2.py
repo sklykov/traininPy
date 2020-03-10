@@ -20,3 +20,12 @@ os.chdir(restored_path) # change the working directory back
 absol_curr_path = os.path.abspath(os.curdir) # Other way to get an absolute path to cwd
 absol_parent_path = os.path.abspath(os.pardir) # Other way to get an absolute path to parent directory
 print(os.listdir(absol_parent_path), "- list of directories inside this repo")
+
+# %% A bit more features
+listOfFilesInCWD = sorted(os.listdir("."))
+listOfFilesInPWD = sorted(os.listdir("..")) # sorted list of files in a parent directory
+
+# %% Walking in the directory tree
+for (current_directory,sub_dirs,dir_files) in os.walk('.'):
+    for fname in dir_files:
+        print(os.path.join(current_directory,fname))
