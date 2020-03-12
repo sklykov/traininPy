@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-k - nearest neighbour classificator
+k - nearest neighbour classificator (as an exercise from the edX course)
 @author: ssklykov
 """
 import numpy as np
@@ -56,6 +56,32 @@ def generateSyntheticData(n:int=10):
     outcomes = np.concatenate((np.repeat(0,n),np.repeat(1,n)))
     return (points,outcomes)
 
+def make_prediction_grid(predictors,outcomes,limits,h,k):
+    """Classify each point on the prediction grid."""
+    (x_min, x_max, y_min, y_max) = limits
+    xs = np.arange(x_min,x_max,h)
+    ys = np.arange(y_min,y_max,h)
+    xx,yy = np.meshgrid(xs,ys)
+    prediction_grid = np.zeros(xx.shape,dtype=int)
+    for i,x in enumerate(xs):
+        for j,y in enumerate(ys):
+            p = np.array([x,y])
+            prediction_grid[j,i] = kNN_predict(p,predictors,outcomes,k)
+    return (xx,yy,prediction_grid)
+
+def plot_prediction_grid (xx, yy, prediction_grid):
+    """ Plot kNN predictions for every point on the grid - rewritten from the edX course."""
+    from matplotlib.colors import ListedColormap
+    background_colormap = ListedColormap (["hotpink","lightskyblue", "yellowgreen"])
+    observation_colormap = ListedColormap (["red","blue","green"])
+    plt.figure(figsize =(8,8))
+    plt.pcolormesh(xx, yy, prediction_grid, cmap = background_colormap, alpha = 0.6)
+    plt.scatter(predictors[:,0], predictors [:,1], c = outcomes, cmap = observation_colormap, s = 50)
+    plt.xlabel('Variable 1'); plt.ylabel('Variable 2')
+    plt.xticks(()); plt.yticks(())
+    plt.xlim (np.min(xx), np.max(xx))
+    plt.ylim (np.min(yy), np.max(yy))
+
 # %% Testing
 votesL = np.array([1,2,1,2,3,3,3,2])
 modeL = max_count_embed(votesL)
@@ -75,3 +101,9 @@ n = 20
 plt.figure()
 plt.plot(points2[0:n,0],points2[0:n,1],'ro')
 plt.plot(points2[n:2*n,0],points2[n:2*n,1],'bo')
+
+# %% Testing predictions
+(predictors,outcomes) = generateSyntheticData(50)
+k=20; limits = (-3,4,-3,4); h = 0.1
+(xx,yy,prediction_grid) = make_prediction_grid(predictors,outcomes,limits,h,k)
+plot_prediction_grid(xx,yy,prediction_grid)
