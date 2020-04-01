@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 """
-k - nearest neighbour classificator (as an exercise from the edX course)
+k - nearest neighbour classificator (as an exercise from the edX course).
 @author: ssklykov
 """
 import numpy as np
 import scipy.stats as scs
 import random
 import matplotlib.pyplot as plt
+
+
 # %% Various functions
 def max_count_embed(votes):
-    """Returning the mode (most frequent element in a an array) from a votes - list or array."""
-    (mode,counts) = scs.mode(votes)
+    """Return the mode (most frequent element in a an array) from a votes - list or array."""
+    (mode, counts) = scs.mode(votes)
     # print(counts)
     return mode[0]
+
 
 def max_vote(votes):
     """Manual bilding of counts and selection randomly the max vote (count) in the case of a tie."""
@@ -25,7 +28,7 @@ def max_vote(votes):
     # print(counts)
     # Building the list of max values
     most_frequent = []; maxCount = max(counts.values()) # In the case of a tie, there will be a few keys corresponding to the max
-    for key,val in counts.items():
+    for key, val in counts.items():
         if val == maxCount:
             most_frequent.append(key)
     return random.choice(most_frequent) # returning randomly single value in the case of multiple ones presented
@@ -43,11 +46,13 @@ def find_nearest_neighbours(point_of_interest,points,k:int=5):
     indicies = indicies[0:k]
     return indicies
 
-def kNN_predict(point_of_interest,points,outcomes,k:int=5):
-    """Simple kNN predictor."""
-    indicies = find_nearest_neighbours(point_of_interest,points,k)
+
+def kNN_predict(point_of_interest, points, outcomes, k: int = 5):
+    """Calculate simple kNN predictor."""
+    indicies = find_nearest_neighbours(point_of_interest, points, k)
     majorVote = max_vote(outcomes[indicies])
     return majorVote
+
 
 def generateSyntheticData(n:int=10):
     """Creation of two classes of normally distributed points."""
@@ -56,12 +61,13 @@ def generateSyntheticData(n:int=10):
     outcomes = np.concatenate((np.repeat(0,n),np.repeat(1,n)))
     return (points,outcomes)
 
-def make_prediction_grid(predictors,outcomes,limits,h,k):
+
+def make_prediction_grid(predictors, outcomes, limits, h, k):
     """Classify each point on the prediction grid."""
     (x_min, x_max, y_min, y_max) = limits
-    xs = np.arange(x_min,x_max,h)
-    ys = np.arange(y_min,y_max,h)
-    xx,yy = np.meshgrid(xs,ys)
+    xs = np.arange(x_min, x_max, h)
+    ys = np.arange(y_min, y_max, h)
+    xx, yy = np.meshgrid(xs, ys)
     prediction_grid = np.zeros(xx.shape,dtype=int)
     for i,x in enumerate(xs):
         for j,y in enumerate(ys):
@@ -70,17 +76,17 @@ def make_prediction_grid(predictors,outcomes,limits,h,k):
     return (xx,yy,prediction_grid)
 
 def plot_prediction_grid (xx, yy, prediction_grid):
-    """ Plot kNN predictions for every point on the grid - rewritten from the edX course."""
+    """Plot kNN predictions for every point on the grid - rewritten from the edX course."""
     from matplotlib.colors import ListedColormap
-    background_colormap = ListedColormap (["hotpink","lightskyblue", "yellowgreen"])
-    observation_colormap = ListedColormap (["red","blue","green"])
+    background_colormap = ListedColormap(["hotpink", "lightskyblue", "yellowgreen"])
+    observation_colormap = ListedColormap(["red", "blue", "green"])
     plt.figure(figsize =(8,8))
-    plt.pcolormesh(xx, yy, prediction_grid, cmap = background_colormap, alpha = 0.6)
-    plt.scatter(predictors[:,0], predictors [:,1], c = outcomes, cmap = observation_colormap, s = 50)
+    plt.pcolormesh(xx, yy, prediction_grid, cmap=background_colormap, alpha=0.6)
+    plt.scatter(predictors[:, 0], predictors[:, 1], c=outcomes, cmap=observation_colormap, s=50)
     plt.xlabel('Variable 1'); plt.ylabel('Variable 2')
     plt.xticks(()); plt.yticks(())
-    plt.xlim (np.min(xx), np.max(xx))
-    plt.ylim (np.min(yy), np.max(yy))
+    plt.xlim(np.min(xx), np.max(xx))
+    plt.ylim(np.min(yy), np.max(yy))
 
 # %% Testing
 votesL = np.array([1,2,1,2,3,3,3,2])
@@ -97,10 +103,10 @@ res1 = arr1.shape
 
 # %% Testing on synthetic data
 n = 20
-(points2,outcomes2) = generateSyntheticData(n)
+(points2, outcomes2) = generateSyntheticData(n)
 plt.figure()
-plt.plot(points2[0:n,0],points2[0:n,1],'ro')
-plt.plot(points2[n:2*n,0],points2[n:2*n,1],'bo')
+plt.plot(points2[0:n, 0], points2[0:n, 1], 'ro')
+plt.plot(points2[n:2*n, 0], points2[n:2*n, 1], 'bo')
 
 # %% Testing predictions
 (predictors,outcomes) = generateSyntheticData(50)
