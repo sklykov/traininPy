@@ -26,7 +26,7 @@ def simpleMethod(label, lock):
 lock = Lock()  # The lock for the processes
 p = Process(target=simpleMethod, args=("spawned child", lock))
 p.start()
-p.join()
+p.join()  # Forces the main process to wait until spawned child finished
 
 for i in range(5):
     Process(target=simpleMethod, args=(("process %s" % i), lock)).start()
