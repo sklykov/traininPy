@@ -55,5 +55,3 @@ sysPath = sys.path  # Refer to the inspection window for details
 from SimpleDatabase_Class import Quad2DImage
 qi = Quad2DImage(2)
 intensities = qi.I
-
-
