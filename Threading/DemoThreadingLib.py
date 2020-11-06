@@ -27,13 +27,11 @@ class DemoThreadedProcess(threading.Thread):
 mutexForAll = threading.Lock()  # lock or semaphore for all threads
 listOfThreads = []
 for i in range(5):
-    new_thread = DemoThreadedProcess(i,mutexForAll)
+    new_thread = DemoThreadedProcess(i, mutexForAll)
     new_thread.start()
     listOfThreads.append(new_thread)
-
+# join() method assures that the main program waits till all threads stopped their work
 for process in listOfThreads:
     process.join()
 
 print("Main script finishes")
-
-
