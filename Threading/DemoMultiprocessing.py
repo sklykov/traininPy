@@ -6,12 +6,17 @@ all spawned children stopped.
 """
 # %% Import section
 import os
-from multiprocessing import Process, Lock
+# import multiprocessing as mp
+from multiprocessing import Process, Value, Array
+#  from multiprocessing import set_start_method  # Raise RuntimeError
 import time
+import sys
 
-# TODO: again, examples above not working properly
+# TODO: now, some calls, especially print() methods in child processes, are not platform or OS agnostic
+# BE CAREFUL for using this demo on different platforms
 
-# %% Definition of methods
+
+# %% Synchronized method
 def simpleMethod(label, lock):
     """For conveying with good style of Python code.
 
@@ -23,31 +28,68 @@ def simpleMethod(label, lock):
         print("The process with data: ", label, os.getpid(), "running")
 
 
-def anotherMethod(some_data: str):
-    global value
+# %% For observing result - use 'Execute in an external system terminal'
+def anotherMethod(someData):
+    # global value
     # lock.acquire()
-
-    print("Spawned process get the data: ")
-    value += 1
-    time.sleep(0.6)  # simulation of a work
+    print("Spawned process get the data: ", someData)
+    # value += 1
+    time.sleep(0.1)  # simulation of a work
 
     # finally:
     #     lock.release()
 
 
+# !: Most IMPORTANTLY, simple print() method doesn't work in child process in current console and Windows
+def simplestMethod():
+    time.sleep(0.1)
+    print("The simplest method id: ", os.getpid())  # Works for Win only if Run in dedicated console
+    print("hi from the simplest method")
+    sys.stdout.flush()  # Helps to print on dedicated console
+
+
+# %% Specification of method that return some value indirectly (using shared variable using class Value)
+# For these demo, the example from Python documentation is used
+def returnMethod(sharedVar, sharedArr):
+    # Drawback - no performing checking of a type that passed in this method
+    sharedVar.value = 1.5
+    for i in range(len(sharedArr)):
+        sharedArr[i] = i*2
+
+
 # %% Main process
 # lock = Lock()  # The lock for the processes
-
 # p = Process(target=simpleMethod, args=("spawned child", lock))
 # p.start()
 # p.join()  # Forces the main process to wait until spawned child finished
-value = 0
-pr = Process(target=anotherMethod, args=("call from main thread"))
-pr.start()
-pr.join()
+if __name__ == '__main__':
+    # value = 0
+    # pr = Process(target=anotherMethod, args=('call from main thread'))
+    pr2 = Process(target=simplestMethod)
+    # pr.start()
+    # pr.join()
+    pr2.start()
+    print("Proof that the suprocess launched: ")
+    print("pid of a subprocess:", pr2.pid)
+    pr2.join()
+    print("exit code:", pr2.exitcode)
+    # sys.stdout.flush()  # doesn't help
+    sharedVar = Value('d', 0.0)  # initialization of some value for shared variable
+    # !: seems that shared array doesn't support append operation ! So, the array should be initialized with
+    # some predifined size!
+    sharedArr = Array('i', range(5))  # initialization of an array with integer values - also shared
+    print("Before entering to a subprocess, the shared variable is:", sharedVar.value)
+    pr3 = Process(target=returnMethod, args=(sharedVar, sharedArr))
+    pr3.start()
+    pr3.join()
+    print("After performing a subprocess, the shared variable is:", sharedVar.value)
+    print("After performing a subprocess, the empty array filled with doubled indecies:", sharedArr[:])
+    time.sleep(0.1)
+    print("Main thread finished")
+    # input()  # For preventing closing external terminal
+
 
 # for i in range(5):
 #     Process(target=simpleMethod, args=(("process %s" % i), lock)).start()
 
-
-print("Main thread finished")
+# anotherMethod("direct call")
