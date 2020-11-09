@@ -9,6 +9,7 @@ import os
 # import multiprocessing as mp
 from multiprocessing import Process, Value, Array
 #  from multiprocessing import set_start_method  # Raise RuntimeError
+import ctypes  # for assigning directly 'string' type for multiprocessing.Value
 import time
 import sys
 
@@ -57,12 +58,21 @@ def returnMethod(sharedVar, sharedArr):
         sharedArr[i] = i*2
 
 
+# %% Testing of typing into 'string' primitive type
+def writeString(sharedStr):
+    targetStr = "This value is written by " + str(os.getpid())
+    print(targetStr)
+    sys.stdout.flush()  # for observing result on Windows and debug this independent process
+    sharedStr.value = targetStr.encode()
+
+
 # %% Main process
 # lock = Lock()  # The lock for the processes
 # p = Process(target=simpleMethod, args=("spawned child", lock))
 # p.start()
 # p.join()  # Forces the main process to wait until spawned child finished
 if __name__ == '__main__':
+    print("******START TESTING******")
     # value = 0
     # pr = Process(target=anotherMethod, args=('call from main thread'))
     pr2 = Process(target=simplestMethod)
@@ -73,6 +83,7 @@ if __name__ == '__main__':
     print("pid of a subprocess:", pr2.pid)
     pr2.join()
     print("exit code:", pr2.exitcode)
+    print("******NEXT TEST******")
     # sys.stdout.flush()  # doesn't help
     sharedVar = Value('d', 0.0)  # initialization of some value for shared variable
     # !: seems that shared array doesn't support append operation ! So, the array should be initialized with
@@ -84,6 +95,14 @@ if __name__ == '__main__':
     pr3.join()
     print("After performing a subprocess, the shared variable is:", sharedVar.value)
     print("After performing a subprocess, the empty array filled with doubled indecies:", sharedArr[:])
+    print("******NEXT TEST******")
+    # sharedStr = Value(ctypes.c_char_p, b'empty') CREATES CONSTANT CRUSHES!!!
+    sharedStr = Array('c', range(40))  # Using bytearray instead of string - thanks Stackoverflow
+    pr4 = Process(target=writeString, args=(sharedStr,))
+    pr4.start()
+    pr4.join()
+    print(sharedStr.value.decode())  # decode the bytearray string
+    print("******END TESTING******")
     time.sleep(0.1)
     print("Main thread finished")
     # input()  # For preventing closing external terminal
