@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Demo of making GUI program with button calling some function with arguments through lambda call
+Demo of making GUI program with button calling some function with arguments through lambda call.
 
 @author: ssklykov
 """
@@ -10,6 +10,19 @@ from tkinter import Tk, Button, RIGHT, LEFT
 
 # %% Some action
 def actionArgs(calling: str):
+    """
+    Print to stdout - the simplest action.
+
+    Parameters
+    ----------
+    calling : str
+        some passed str argument.
+
+    Returns
+    -------
+    None.
+
+    """
     print("I print for " + calling)
 
 
