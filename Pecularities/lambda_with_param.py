@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This module for collecting some peculiriaties (inspired by "Programming Python")
+This module for collecting some peculiriaties (inspired by "Programming Python" by M. Lutz)
 
 @author: ssklykov
 """

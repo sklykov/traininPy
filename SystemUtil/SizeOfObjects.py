@@ -3,7 +3,6 @@
 As a small example for possible future reusing or referring to. Only for training purposes.
 @author: ssklykov
 """
-
 # %% Imports
 import os
 
