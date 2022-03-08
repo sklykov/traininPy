@@ -18,6 +18,16 @@ class DemoThreadedProcess(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        """
+        Simulate multithread work.
+
+        If the mutex is not acquired by other threaded class instance, enters and sleep.
+
+        Returns
+        -------
+        None.
+
+        """
         with self.mutex:
             print("assigned count is ", self.count)
             time.sleep((1+abs(self.count))/2)  # Some work emulation
