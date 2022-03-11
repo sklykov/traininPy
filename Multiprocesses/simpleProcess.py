@@ -34,7 +34,7 @@ class SimpleProcess(Process):
         """
         for i in range(self.n_steps):
             self.processed_array.append(i + self.some_id)
-            time.sleep(0.1)  # Simulation of some work
+            time.sleep(0.15)  # Simulation of some work
         self.data_queue.put_nowait(self.processed_array)
 
 
