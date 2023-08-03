@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Acient Rome Cipher workings - text processing and so on
-@author: ssklykov
+Acient Rome Cipher implementation - text processing and so on.
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Import section
 import string
@@ -14,7 +17,7 @@ positions = dict(zip(alphabet, numbers))
 
 # %% Very useful and possible re-inventing a wheel - get the key value using a value
 def getKey(dictionary: dict, input_value):
-    """A bit of web help - the useful function to find a key using a value (different workflow to common one)"""
+    """Find a key using a value."""
     retKey = None
     for key, value in dictionary.items():
         if input_value == value:
@@ -25,7 +28,7 @@ def getKey(dictionary: dict, input_value):
 
 # %% Encoding messages
 def encode(message: str, positions: dict, shift: int = 1):
-    """Encoding of an input message using specified alphabet as a dicitionary and relative shift"""
+    """Encode of an input message using specified alphabet as a dicitionary and relative shift."""
     encodedMessage = ""  # initialize the returning value
     for i in range(len(message)):
         positionChar = positions[message[i]]
@@ -40,7 +43,7 @@ def encode(message: str, positions: dict, shift: int = 1):
 
 # %% Decoding messages
 def decode(message: str, positions: dict, shift: int = 1) -> str:
-    """Decoding messages using inversion of a shift used for encode them """
+    """Decode messages using inversion of a shift used for encode them."""
     decodedMessage = ""
     for i in range(len(message)):
         positionChar = positions[message[i]]

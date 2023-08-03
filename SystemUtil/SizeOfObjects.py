@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 As a small example for possible future reusing or referring to. Only for training purposes.
-@author: ssklykov
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 import os
@@ -28,7 +31,7 @@ for (foldersInProject, subfoldersInTree, filesInTree) in os.walk(projectDir):
             sizeOfFile = os.path.getsize(absolutePathToFile)
             # print("file", file, "has the size:", sizeOfFile)
             # The code below will work in assumption of unique file names in each visited folder
-            if not(file in sizes_of_files.keys()):
+            if file not in sizes_of_files.keys():
                 sizes_of_files[file] = sizeOfFile
 
 # Finding the file with a maximum size. Should exist more elegant and concise way!

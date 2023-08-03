@@ -8,7 +8,7 @@ Demonstrate implementation of producer-consumer concept on GUI.
 """
 # %% Global imports
 import tkinter as tk
-from tkinter.ttk import Frame, Button, Label
+from tkinter.ttk import Frame, Button, Label, Style
 from tkinter import font  # Explicit import, prevent some bugs
 import platform
 import ctypes
@@ -47,9 +47,13 @@ class ProdConsG(Frame):
         self.idle_events_count = 1; self.idle_delay_ms = 2000; self.event_count = 0
 
         # Make GUI elements
+        self.btn_style = Style(); self.start_cons_btn_style_name = 'Custom1.TButton'
+        self.btn_style.configure(self.start_cons_btn_style_name, foreground='green')  # Make specific styling of ttk.Button
         self.produce_event_btn = Button(master=self, text="Generate Event", command=self.generate_event)
-        self.start_consumer_btn = Button(master=self, text="Start Consumer", command=self.start_consumer)
+        self.start_consumer_btn = Button(master=self, text="Start Consumer", command=self.start_consumer,
+                                         style=self.start_cons_btn_style_name)
         self.text_report = Label(master=self, text="Program launched, waiting for events")
+        # self.start_consumer_btn.config(style="['foreground', 'green']")
 
         # Put the GUI elements on the Frame
         pad = 10  # in pixels, padding between elements on the Frame
@@ -97,6 +101,7 @@ class ProdConsG(Frame):
             self.notifier = Event()  # simple notifier about an action (some command will be put in the Queue)
             self.commands_queue = Queue(maxsize=1)  # to check that values put / get precisely with single quantity
             self.consumer = Thread(name="Computation Thread", target=self.thread_work)
+            self.btn_style.configure(self.start_cons_btn_style_name, foreground='red')  # change font color to red on the button
             self.consumer_live = True; self.start_consumer_btn.config(text="Stop Consumer")
             self.event_count = 0; self.consumer.start()  # start initialized Thread
         else:
@@ -114,6 +119,7 @@ class ProdConsG(Frame):
             if self.periodic_task is None:
                 self.periodic_task = self.after(self.idle_delay_ms, self.idle_event)
                 self.text_report.config(text="Wait for the idle event handle")
+            self.btn_style.configure(self.start_cons_btn_style_name, foreground='green')  # change font color to green
             self.start_consumer_btn.config(text="Start Consumer")
 
     def thread_work(self):

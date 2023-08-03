@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Training create / read txt files - again
-@author: ssklykov
+Training create / read txt files.
+
+@author: sklykov
+@license: The Unlicense
+
 """
+import os
+
 lines = ['raz', 'dva', 'tri', 'this is the end']
 endline = '\n'
 # %% Demo writing
@@ -26,5 +31,4 @@ with open("demo.txt", 'r') as rfile:
         readed_lines.append(line)
 
 # %% Cleaning up
-import os
 os.remove("demo.txt")

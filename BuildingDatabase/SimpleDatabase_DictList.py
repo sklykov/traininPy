@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Implementation of simple database containing some values (coordinates and intensity - like 2D image)
-@author: ssklykov
+Implementation of simple database containing some values (coordinates and intensity - like 2D image).
+
+@author: sklykov
+@license: The Unlicense
+
 """
 
 
 class ImageDict():
-    """Base class - containing a list with points (dictionary): coordinates of a point and its intensity"""
+    """Base class - containing a list with points (dictionary): coordinates of a point and its intensity."""
+
     point = {}  # initializer for single point - a dictionary
     arrayOfPoints = []  # enpty list for holding points
     keys = ['x', 'y', 'intensity']
@@ -22,7 +26,9 @@ class ImageDict():
 
     def getPoint(self, n: int):
         """
-        Retrieving a point. If index exceeding the actual amount of points, returns None
+        Retrieve a point.
+
+        If index exceeding the actual amount of points, returns None.
 
         Parameters
         ----------

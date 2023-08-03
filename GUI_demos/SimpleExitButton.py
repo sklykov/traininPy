@@ -3,7 +3,9 @@
 """
 Simple demo of Exit button
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 from tkinter import Tk, Button, RIGHT
 topLevelWidget = Tk()

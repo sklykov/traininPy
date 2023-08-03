@@ -2,7 +2,9 @@
 """
 Make experiment on overriding Process class from multiprocessing library.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 from multiprocessing import Process, Array

@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Sys and os path manipulations - refactored
+Sys and os path manipulations - refactored.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 import os
 import sys
+from SimpleDatabase_Class import Quad2DImage
 
 # %% Classical way of getting current working directory
 # print(sys.path) # Printing all evolved in searching modules paths
@@ -19,7 +22,7 @@ def projectImportTree() -> list:
     listOfDirs = os.listdir(os.getcwd())
     print(listOfDirs)
     i = 10  # Maximum number of iterations (in a folder tree)
-    while not(anchorFolder in listOfDirs):
+    while anchorFolder not in listOfDirs:
         os.chdir("..")
         listOfDirs = os.listdir(os.getcwd())
         # print(listOfDirs)  # Debugging
@@ -52,6 +55,5 @@ elif (sys.path.count(other_dir) > 1):
 sysPath = sys.path  # Refer to the inspection window for details
 
 # %% Cause additional folder from the entire repository has been added, below is importing some module from it
-from SimpleDatabase_Class import Quad2DImage
 qi = Quad2DImage(2)
 intensities = qi.I

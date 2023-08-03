@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Synchronized call to the shared object - my own experiments inspired by examples from the book "Programming Python"
-Up to the moment, it work with some assumptions or with cludges
-@author: ssklykov
+Synchronized call to the shared object - my own experiments inspired by examples from the book "Programming Python".
+
+@author: sklykov
+@license: The Unlicense
+
 """
 import _thread
 import time
@@ -18,7 +20,7 @@ def add_to_list(thisId):
     print("The thread with following process evoked:", thisId)
     # print("Semaphore is red?",semaphore.locked())
     isNotTheWorkAccomplished = True
-    while(isNotTheWorkAccomplished):
+    while isNotTheWorkAccomplished:
         # various_sleeping_time = numpy.arange(0,0.1,0.02)
         # while(semaphore.locked()):
         #         time.sleep(0.01 + random.choice(various_sleeping_time)) # possible dirty hack

@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Experiments with threading in Python. _thread - is low-level library for multithreading programs!
-@author: ssklykov
+Experiments with threading in Python.
+
+_thread - is low-level library for multithreading programs!
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Experiments with the simple '_thread module'
 import _thread

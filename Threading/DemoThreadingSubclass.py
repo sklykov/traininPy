@@ -2,7 +2,9 @@
 """
 Another demo of using threading module.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 from threading import Thread
 import time

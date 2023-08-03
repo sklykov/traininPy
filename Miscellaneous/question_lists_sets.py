@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Сhecking assignment (test) questions
+Сhecking assignment (test) questions.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 import re
 # Using intersection of sets for finding intersections elements in two lists

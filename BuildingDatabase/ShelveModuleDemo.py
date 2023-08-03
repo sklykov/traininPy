@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Testing a bit of functionality of shelve module
-@author: ssklykov
+Testing a bit of functionality of shelve module.
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 import shelve

@@ -2,7 +2,9 @@
 """
 Test capabilities of running multiprocessing processes in the separate script by import the module.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 from simpleProcess import SimpleProcess
@@ -38,7 +40,7 @@ class CallTheProcessFromModule():
             if processes[i].is_alive():
                 processes[i].join(); print("Process joined:", processes[i])
         for i in range(self.n_processes):
-            if not(data_queues[i].empty()) and (data_queues[i].qsize() > 0):
+            if not (data_queues[i].empty()) and (data_queues[i].qsize() > 0):
                 data = data_queues[i].get_nowait(); self.data_array.append(data)
                 print("Processed array from 1st process:", data)
 

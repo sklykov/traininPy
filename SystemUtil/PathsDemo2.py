@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Continuing to test (make) some features related to os and sys modules (refactored)
-@author: ssklykov
+Continuing to test (make) some features related to os and sys modules (refactored).
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Import section
 import os

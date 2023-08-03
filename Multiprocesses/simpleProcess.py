@@ -2,7 +2,9 @@
 """
 Simple multiprocessing Process implementation.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 from multiprocessing import Process, Queue
@@ -51,9 +53,9 @@ if __name__ == "__main__":
     process1.start(); process2.start(); process1.join(); process2.join()
     # For getting back the job results, use Queue
     print("Attempt to directly acces to Process variables:", process1.processed_array, process2.processed_array)
-    if not(data_queue1.empty()) and (data_queue1.qsize() > 0):
+    if not (data_queue1.empty()) and (data_queue1.qsize() > 0):
         print("Processed array from 1st process:", data_queue1.get_nowait())
-    if not(data_queue2.empty()) and (data_queue2.qsize() > 0):
+    if not (data_queue2.empty()) and (data_queue2.qsize() > 0):
         print("Processed array from 1st process:", data_queue2.get_nowait())
 
     # Tests concerning access to the standard output reimplmented by the Spyder IDE !!!

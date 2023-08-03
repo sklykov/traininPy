@@ -1,7 +1,9 @@
 """
 Regression Demo using built-in libraries.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 
 # %% Import section (standard way)

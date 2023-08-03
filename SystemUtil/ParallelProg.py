@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Testing forking / parallel programming
-@author: ssklykov
+Testing forking / parallel programming.
+
+@author: sklykov
+@license: The Unlicense
+
 """
 import os
 

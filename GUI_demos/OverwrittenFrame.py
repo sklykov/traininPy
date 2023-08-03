@@ -3,7 +3,9 @@
 """
 Subclassing of Frame class from tkinter for simple GUI counter.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 from tkinter import Frame, Button, LEFT, RIGHT
 # import sys

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Demo of making GUI program with button calling some function without arguments
+Demo of making GUI program with button calling some function without arguments.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 from tkinter import Tk, Button, RIGHT, LEFT
 

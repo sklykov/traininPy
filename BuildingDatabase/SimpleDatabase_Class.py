@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Using a general class as storage item - instead of List of Dictionaries and Dictionaries of Dictionaries
-This class itself plays a role of a simple image
-@author: ssklykov
+Using a general class as storage item - instead of List of Dictionaries and Dictionaries of Dictionaries.
+
+This class itself plays a role of a simple image.
+
+@author: sklykov
+@license: The Unlicense
+
 """
 
 

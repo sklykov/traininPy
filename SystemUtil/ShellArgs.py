@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Testing command-line arguments + Shell Variables
-@author: ssklykov
+Testing command-line arguments + Shell Variables.
+
+@author: sklykov
+@license: The Unlicense
+
 """
 import sys
 import os

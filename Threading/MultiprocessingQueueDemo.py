@@ -2,7 +2,9 @@
 """
 Queue implementation in multiprocessing module - again, demo for the synchronization of trainings.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Imports
 import time

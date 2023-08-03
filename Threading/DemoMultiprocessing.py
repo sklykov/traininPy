@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Simple demo of multiprocessing module using.
+"""
+Simple demo of multiprocessing module using.
+
 The main idea, seems, that all spawned childrens evoked in a order, but the main thread stops before
 all spawned children stopped.
-@author: ssklykov
+
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Import section
 import os
 # import multiprocessing as mp
 from multiprocessing import Process, Value, Array
 #  from multiprocessing import set_start_method  # Raise RuntimeError
-import ctypes  # for assigning directly 'string' type for multiprocessing.Value
+# import ctypes  # for assigning directly 'string' type for multiprocessing.Value
 import time
 import sys
 
-# TODO: now, some calls, especially print() methods in child processes, are not platform or OS agnostic
 # BE CAREFUL for using this demo on different platforms
 
 
@@ -106,9 +110,3 @@ if __name__ == '__main__':
     time.sleep(0.1)
     print("Main thread finished")
     # input()  # For preventing closing external terminal
-
-
-# for i in range(5):
-#     Process(target=simpleMethod, args=(("process %s" % i), lock)).start()
-
-# anotherMethod("direct call")

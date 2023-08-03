@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Using shelve module for making persistence objects saving (using developed classes)
-@author: ssklykov
+Using shelve module for making persistence objects saving (using developed classes).
+
+@author: sklykov
+@license: The Unlicense
+
 """
 import shelve
 from SimpleDatabase_Class import Quad2DImage

@@ -3,7 +3,9 @@
 """
 Demo of making GUI program with button calling some function with arguments through lambda call.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 from tkinter import Tk, Button, RIGHT, LEFT
 

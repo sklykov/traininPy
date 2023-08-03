@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This module for collecting some peculiriaties (inspired by "Programming Python" by M. Lutz)
+Pecularity of lambda function with parameter call.
 
-@author: ssklykov
+@author: sklykov
+@license: The Unlicense
+
 """
 # %% Lambda function remembers last assigned values to used parameters
 parameter = 1
